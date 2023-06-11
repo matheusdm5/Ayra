@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Collisions/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Drops/Life.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Life.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 4.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[node name="Node2D" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 2
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 0 )
+shape = SubResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[node name="Life_Area" parent="." instance=ExtResource( 1 )]
+collision_layer = 65535
+collision_mask = 65535
+
+[node name="CollisionShape2D" parent="Life_Area" index="0"]
+position = Vector2( 1, 0 )
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="Life_Area" to="." method="_on_Life_Area_area_entered"]
+
+[editable path="Life_Area"]

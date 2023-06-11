@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Resources/Stats.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+Player_HP = 4
+Player_DEF = 0
+Slime_HP = 2
+Slime_DEF = 0
+Slime_DMG = 1
+F_Skeleton_HP = 4
+F_Skeleton_DEF = 0.5
+F_Skeleton_DMG = 2
+Bomb_HP = 1
+Bomb_DEF = 0
+Bomb_DMG = 3
+P_SingleBullet_DMG = 1
+E_SingleBullet_DMG = 1

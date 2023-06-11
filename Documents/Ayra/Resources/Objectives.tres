@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Resources/Objectives.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+map = 1
+e_counter = 15
+lv_1 = 15
+lv_2 = 20
+lv_3 = 30

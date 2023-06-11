@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Maps/Minimap_HUD/Level_1_Minimap.tscn" type="PackedScene" id=1]
+
+[node name="Minimap_1" type="CanvasLayer"]
+
+[node name="Level_1_minmap" parent="." instance=ExtResource( 1 )]
+position = Vector2( 951, -10 )
+scale = Vector2( 0.241279, 0.241279 )

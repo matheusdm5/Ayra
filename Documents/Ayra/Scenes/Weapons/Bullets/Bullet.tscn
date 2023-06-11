@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scenes/Collisions/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Bullet.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Weapons/Bullets/bullet.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 2.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "Object_Colide"
+length = 0.65
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 7, 8, 9, 4 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Object_in_Air"
+length = 0.35
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 2.0
+
+[node name="Node2D" type="Area2D"]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+hframes = 5
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Object_Colide = SubResource( 2 )
+anims/Object_in_Air = SubResource( 5 )
+anims/RESET = SubResource( 3 )
+
+[node name="Hitbox_SingleBullet" parent="." instance=ExtResource( 1 )]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" parent="Hitbox_SingleBullet" index="0"]
+shape = SubResource( 4 )
+
+[connection signal="area_entered" from="." to="." method="_on_Node2D_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Node2D_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="Hitbox_SingleBullet"]

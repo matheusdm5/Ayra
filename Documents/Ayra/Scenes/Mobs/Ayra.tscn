@@ -1,0 +1,269 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Scenes/Collisions/Hurtbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Fonts/Pixel.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Ayra/Ayra.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Weapons/Wand.png" type="Texture" id=5]
+[ext_resource path="res://Assets/HUD/life_Player.png" type="Texture" id=6]
+[ext_resource path="res://Assets/HUD/Arrow.png" type="Texture" id=7]
+
+[sub_resource type="CapsuleShape2D" id=50]
+radius = 4.5
+height = 4.84
+
+[sub_resource type="Animation" id=48]
+resource_name = "Death"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ayra_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 35, 36, 37, 38, 39, 40, 41, 49, 50, 51, 52 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ayra_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ayra_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Walk"
+length = 0.25
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ayra_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 8, 7 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Walk_Down"
+length = 0.25
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ayra_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 21, 22 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Walk_Up"
+length = 0.25
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ayra_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 14, 15 ]
+}
+
+[sub_resource type="Animation" id=46]
+resource_name = "Idle"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wand_Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=44]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wand_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Wand_Sprite:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "Shoot"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/path = NodePath("Wand_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 0, 5 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=49]
+radius = 4.5
+height = 5.0
+
+[sub_resource type="DynamicFont" id=51]
+font_data = ExtResource( 2 )
+
+[node name="Ayra" type="KinematicBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 53
+script = ExtResource( 3 )
+
+[node name="Ayra_Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -1 )
+texture = ExtResource( 4 )
+hframes = 7
+vframes = 8
+
+[node name="Ayra_Collision" type="CollisionShape2D" parent="."]
+modulate = Color( 0, 0.854902, 1, 1 )
+position = Vector2( 0.5, -2 )
+shape = SubResource( 50 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Death = SubResource( 48 )
+anims/Idle = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+anims/Walk = SubResource( 4 )
+anims/Walk_Down = SubResource( 7 )
+anims/Walk_Up = SubResource( 6 )
+
+[node name="AnimationWand" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Wand_Ray")
+anims/Idle = SubResource( 46 )
+anims/RESET = SubResource( 44 )
+anims/Shoot = SubResource( 45 )
+
+[node name="Camera_Ray" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 5, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="Camera_Ray"]
+position = Vector2( 33, 0 )
+current = true
+zoom = Vector2( 0.2, 0.2 )
+smoothing_enabled = true
+smoothing_speed = 8.0
+
+[node name="Wand_Ray" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 10, 0 )
+
+[node name="Wand_Sprite" type="Sprite" parent="Wand_Ray"]
+position = Vector2( 10, 2 )
+texture = ExtResource( 5 )
+hframes = 5
+vframes = 2
+
+[node name="BulletSpawn" type="Position2D" parent="Wand_Ray/Wand_Sprite"]
+position = Vector2( 4, -2 )
+
+[node name="Hurtbox_Ayra" parent="." instance=ExtResource( 1 )]
+collision_layer = 2
+collision_mask = 53
+
+[node name="CollisionShape2D" parent="Hurtbox_Ayra" index="0"]
+position = Vector2( 0.5, -2 )
+shape = SubResource( 49 )
+
+[node name="RayCast_Arrow" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 30, 0 )
+
+[node name="Arrow" type="Sprite" parent="RayCast_Arrow"]
+position = Vector2( 19, 1.42109e-14 )
+scale = Vector2( 0.6875, 0.6875 )
+texture = ExtResource( 7 )
+
+[node name="Life" type="Sprite" parent="."]
+position = Vector2( 2.38419e-07, -13.75 )
+scale = Vector2( 0.78125, 0.78125 )
+texture = ExtResource( 6 )
+hframes = 2
+vframes = 11
+
+[node name="Label" type="Label" parent="."]
+margin_left = 14.0
+margin_top = -17.0
+margin_right = 95.0
+margin_bottom = -2.0
+rect_scale = Vector2( 0.181745, 0.328751 )
+custom_fonts/font = SubResource( 51 )
+text = "E_Counter"
+
+[connection signal="area_entered" from="Hurtbox_Ayra" to="." method="_on_Hurtbox_area_entered"]
+
+[editable path="Hurtbox_Ayra"]
