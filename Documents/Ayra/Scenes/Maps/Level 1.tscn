@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Scenes/Mobs/Floating_Skeleton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Mobs/Bomb.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Assets/Tilesets/Decorations.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Tilesets/Background.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/HUD/Minimap_1.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/HUD/Joystick_movement.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/HUD/Joystick_Aim.tscn" type="PackedScene" id=10]
 
 [sub_resource type="NavigationPolygon" id=89]
 vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -837,8 +839,6 @@ position = Vector2( -252, 573 )
 [node name="Ayra" parent="." instance=ExtResource( 4 )]
 position = Vector2( -299, 211 )
 
-[node name="Minimap_1" parent="." instance=ExtResource( 8 )]
-
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( -328, 406 )
 curve = SubResource( 59 )
@@ -849,3 +849,12 @@ rotate = false
 
 [node name="Bomb" parent="Path2D/PathFollow2D" instance=ExtResource( 2 )]
 patrol_type = "loop"
+
+[node name="Minimap_1" parent="." instance=ExtResource( 8 )]
+
+[node name="Joystick_Movement" parent="." instance=ExtResource( 9 )]
+
+[node name="Joystick_Aim" parent="." instance=ExtResource( 10 )]
+
+[connection signal="use_move_vector" from="Joystick_Movement" to="Ayra" method="_on_Joystick_Movement_use_move_vector"]
+[connection signal="use_move_vector_aim" from="Joystick_Aim" to="Ayra" method="_on_Joystick_Aim_use_move_vector_aim"]

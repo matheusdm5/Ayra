@@ -213,3 +213,36 @@ func enemy_counter():
 			if Obj.e_counter < 0:
 				Obj.e_counter = 0
 			
+func _on_Joystick_Movement_use_move_vector(move_vector):
+	var motion = move_vector
+
+	if motion != Vector2.ZERO:
+		if motion.y < 0:
+			$AnimationPlayer.play("Walk_Up")
+		elif motion.y > 0:
+			$AnimationPlayer.play("Walk_Down")
+		elif motion.x > 0:
+			$AnimationPlayer.play("Walk")
+			$Ayra_Sprite.scale.x = 1
+			$Wand_Ray.scale.y = 1
+		elif motion.x < 0:
+			$AnimationPlayer.play("Walk")
+			$Ayra_Sprite.scale.x = -1
+			$Wand_Ray.scale.y = -1
+		else:
+			$AnimationPlayer.play("Idle")
+
+	motion = motion.normalized()
+	move_and_slide(motion * movespeed)
+
+func _on_Joystick_Aim_use_move_vector_aim(move_vector):
+	var rotation_angle = move_vector.angle()
+	$Wand_Ray.rotation = rotation_angle
+	$Camera_Ray.rotation = rotation_angle
+
+	if move_vector.x < 0:
+		$Wand_Ray.scale.y = -1
+	else:
+		$Wand_Ray.scale.y = 1
+	if can_fire:
+		shoot()

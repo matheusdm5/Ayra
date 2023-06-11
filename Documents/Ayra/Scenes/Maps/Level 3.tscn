@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Scenes/Tilesets/Portal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Tilesets/Background.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Scenes/Mobs/Bomb.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Mobs/Floating_Skeleton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/HUD/Minimap_3.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/HUD/Joystick_movement.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/HUD/Joystick_Aim.tscn" type="PackedScene" id=10]
 
 [sub_resource type="NavigationPolygon" id=89]
 vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -795,8 +797,6 @@ position = Vector2( -562, -295 )
 [node name="Ayra" parent="." instance=ExtResource( 4 )]
 position = Vector2( -202, 362 )
 
-[node name="Minimap_3" parent="." instance=ExtResource( 8 )]
-
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource( 108 )
 
@@ -896,3 +896,12 @@ position = Vector2( -238, 6 )
 
 [node name="Floating Skeleton10" parent="." instance=ExtResource( 7 )]
 position = Vector2( -391, 120 )
+
+[node name="Minimap_3" parent="." instance=ExtResource( 8 )]
+
+[node name="Joystick_Aim" parent="." instance=ExtResource( 10 )]
+
+[node name="Joystick_Movement" parent="." instance=ExtResource( 9 )]
+
+[connection signal="use_move_vector_aim" from="Joystick_Aim" to="Ayra" method="_on_Joystick_Aim_use_move_vector_aim"]
+[connection signal="use_move_vector" from="Joystick_Movement" to="Ayra" method="_on_Joystick_Movement_use_move_vector"]
