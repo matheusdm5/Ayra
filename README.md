@@ -18,7 +18,7 @@ A dungeon exploration style shooter where your objective is to locate all the en
 
 # Screenshots
 
-![My Image](\Documents\Ayra\Screenshots\Ayra.png)
-![My Image](\Documents\Ayra\Screenshots\Ayra1.png)
-![My Image](\Documents\Ayra\Screenshots\Ayra2.png)
-![My Image](\Documents\Ayra\Screenshots\Ayra4.png)
+![My Image](Documents\Ayra\Screenshots\Ayra.png)
+![My Image](Documents\Ayra\Screenshots\Ayra1.png)
+![My Image](Documents\Ayra\Screenshots\Ayra2.png)
+![My Image](Documents\Ayra\Screenshots\Ayra4.png)
