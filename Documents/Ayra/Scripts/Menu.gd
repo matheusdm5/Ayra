@@ -12,7 +12,9 @@ func _on_StartButton_pressed():
 	get_tree().change_scene("res://Scenes/Maps/Level 1.tscn")
 
 func _on_InstructionsButton_pressed():
-	pass
+	var Instruction_menu = load("res://Scenes/HUD/Instructions_Mobile.tscn")
+	Instruction_menu = Instruction_menu.instance()
+	get_parent().add_child(Instruction_menu)
 
 func _on_LeaderboardButton_pressed():
 	pass
