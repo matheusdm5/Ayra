@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/HUD/Reset_Button.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Player_died_Menu.gd" type="Script" id=2]
+
+[node name="Reset" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Reset" type="Button" parent="."]
+anchor_right = 0.1
+anchor_bottom = 0.15
+margin_left = 427.0
+margin_top = 335.0
+margin_right = 439.0
+margin_bottom = 355.0
+rect_scale = Vector2( 1.34851, 1.39754 )
+
+[node name="Sprite" type="Sprite" parent="Reset"]
+position = Vector2( 56.3585, 54.3812 )
+scale = Vector2( 3.52764, 3.40388 )
+texture = ExtResource( 1 )
+
+[connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]

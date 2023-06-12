@@ -264,6 +264,7 @@ rect_scale = Vector2( 0.181745, 0.328751 )
 custom_fonts/font = SubResource( 51 )
 text = "E_Counter"
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="Hurtbox_Ayra" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hurtbox_Ayra"]

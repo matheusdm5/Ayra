@@ -215,34 +215,44 @@ func enemy_counter():
 			
 func _on_Joystick_Movement_use_move_vector(move_vector):
 	var motion = move_vector
+	if key_input == true:
+		if motion != Vector2.ZERO:
+			if motion.y < 0:
+				$AnimationPlayer.play("Walk_Up")
+			elif motion.y > 0:
+				$AnimationPlayer.play("Walk_Down")
+			elif motion.x > 0:
+				$AnimationPlayer.play("Walk")
+				$Ayra_Sprite.scale.x = 1
+				$Wand_Ray.scale.y = 1
+			elif motion.x < 0:
+				$AnimationPlayer.play("Walk")
+				$Ayra_Sprite.scale.x = -1
+				$Wand_Ray.scale.y = -1
+			else:
+				$AnimationPlayer.play("Idle")
 
-	if motion != Vector2.ZERO:
-		if motion.y < 0:
-			$AnimationPlayer.play("Walk_Up")
-		elif motion.y > 0:
-			$AnimationPlayer.play("Walk_Down")
-		elif motion.x > 0:
-			$AnimationPlayer.play("Walk")
-			$Ayra_Sprite.scale.x = 1
-			$Wand_Ray.scale.y = 1
-		elif motion.x < 0:
-			$AnimationPlayer.play("Walk")
-			$Ayra_Sprite.scale.x = -1
-			$Wand_Ray.scale.y = -1
-		else:
-			$AnimationPlayer.play("Idle")
-
-	motion = motion.normalized()
-	move_and_slide(motion * movespeed)
+		motion = motion.normalized()
+		move_and_slide(motion * movespeed)
+	
+	if Status.Player_HP == 0:
+		key_input = false
+		Player_die()
 
 func _on_Joystick_Aim_use_move_vector_aim(move_vector):
-	var rotation_angle = move_vector.angle()
-	$Wand_Ray.rotation = rotation_angle
-	$Camera_Ray.rotation = rotation_angle
+		var rotation_angle = move_vector.angle()
+		$Wand_Ray.rotation = rotation_angle
+		$Camera_Ray.rotation = rotation_angle
 
-	if move_vector.x < 0:
-		$Wand_Ray.scale.y = -1
-	else:
-		$Wand_Ray.scale.y = 1
-	if can_fire:
-		shoot()
+		if move_vector.x < 0:
+			$Wand_Ray.scale.y = -1
+		else:
+			$Wand_Ray.scale.y = 1
+		if can_fire:
+			shoot()
+
+func _on_AnimationPlayer_animation_finished(Death): #Modificar Player_died_menu com base na plataforma a ser exportada
+	var Player_died_menu = load("res://Scenes/HUD/Player_died.tscn")
+#	var Player_died_menu = load ("res://Scenes/HUD/Player_died_Mobile.tscn")
+	Player_died_menu = Player_died_menu.instance()
+	get_parent().add_child(Player_died_menu)
